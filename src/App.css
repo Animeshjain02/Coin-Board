@@ -1,39 +1,64 @@
-.App {
-  text-align: center;
+
+
+
+/* Background */
+body {
+  background-color: #0f172a; /* slate-900 */
+  color: #ffffff;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Container */
+.crypto-container {
+  padding: 24px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+/* Table Styling */
+.crypto-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Header */
+.crypto-table thead {
+  background-color: #1e293b; /* slate-800 */
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+.crypto-table th {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #94a3b8;
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+/* Cells */
+.crypto-table td {
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* Hover Effect */
+.crypto-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Right Align Numeric Columns */
+.text-right {
+  text-align: right;
+}
+
+/* Positive / Negative */
+.positive {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.negative {
+  color: #f43f5e;
+  font-weight: 600;
+}
+
