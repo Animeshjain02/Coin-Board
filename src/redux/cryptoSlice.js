@@ -6,26 +6,28 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchAssets = createAsyncThunk(
   "crypto/fetchAssets",
   async () => {
+    // Using Coinlore API since CoinCap is sometimes blocked by ISPs and CoinGecko has strict CORS rate limits
     const res = await fetch(
-      // "https://rest.coincap.io/v3/assets?ids=bitcoin,ethereum,monero,litecoin",
-      
-      "https://rest.coincap.io/v3/assets?limit=50ids=bitcoin,ethereum,monero,litecoin&include=market_data",
-
-      {
-        headers: {
-          Authorization: "Bearer YOUR_API_KEY_HERE",
-        },
-      }
+      "https://api.coinlore.net/api/tickers/"
     );
 
     if (!res.ok) {
-      throw new Error("Failed to fetch assets");
+      throw new Error(`Failed to fetch assets: ${res.status}`);
     }
 
-    const data = await res.json();
-    console.log("API",data);
-
-    return data.data; // v3 still returns { data: [...] }
+    const json = await res.json();
+    
+    // Convert Coinlore's response format to match App.jsx expectations
+    return json.data.map(coin => ({
+      id: coin.id,
+      rank: coin.rank,
+      name: coin.name,
+      symbol: coin.symbol,
+      priceUsd: coin.price_usd,
+      marketCapUsd: coin.market_cap_usd,
+      volumeUsd24Hr: coin.volume24,
+      changePercent24Hr: coin.percent_change_24h,
+    }));
   }
 );
 

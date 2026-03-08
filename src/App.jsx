@@ -19,7 +19,7 @@ export default function App() {
 
     const interval = setInterval(() => {
       dispatch(fetchAssets());
-    }, 10000); // refresh every 10 seconds
+    }, 30000); // refresh every 30 seconds
 
     return () => clearInterval(interval);
   }, [dispatch]);
@@ -58,11 +58,24 @@ export default function App() {
               <td>{coin.rank}</td>
 
               <td>
-                <div style={{ fontWeight: "600" }}>
-                  {coin.name}
-                </div>
-                <div style={{ fontSize: "12px", opacity: 0.6 }}>
-                  {coin.symbol}
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <img
+                    src={`https://assets.coincap.io/assets/icons/${coin.symbol.toLowerCase()}@2x.png`}
+                    alt={coin.name}
+                    style={{ width: "32px", height: "32px", borderRadius: "50%" }}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "https://cdn-icons-png.flaticon.com/512/814/814402.png"; // Generic fallback coin icon
+                    }}
+                  />
+                  <div>
+                    <div style={{ fontWeight: "600", fontSize: "15px" }}>
+                      {coin.name}
+                    </div>
+                    <div style={{ fontSize: "12px", opacity: 0.7 }}>
+                      {coin.symbol}
+                    </div>
+                  </div>
                 </div>
               </td>
 
